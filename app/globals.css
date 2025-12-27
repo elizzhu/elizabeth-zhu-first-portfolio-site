@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  overscroll-behavior: none;
+  background-color: #1A1A1A;
+}
+
+body {
+  background-color: #F7F7F7;
+  color: #1c2122;
+  overscroll-behavior: none;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* Text selection highlight */
+::selection {
+  background-color: rgba(20, 184, 166, 0.4);
+  color: inherit;
+}
+
+::-moz-selection {
+  background-color: rgba(20, 184, 166, 0.4);
+  color: inherit;
+}
+
+/* Custom gradient blur effects for hero section */
+.gradient-blur-1 {
+  background: radial-gradient(ellipse at center, rgba(100, 180, 255, 0.3) 0%, transparent 70%);
+  filter: blur(60px);
+}
+
+.gradient-blur-2 {
+  background: radial-gradient(ellipse at center, rgba(180, 100, 255, 0.25) 0%, transparent 70%);
+  filter: blur(80px);
+}
+
+.gradient-blur-3 {
+  background: radial-gradient(ellipse at center, rgba(255, 150, 200, 0.2) 0%, transparent 70%);
+  filter: blur(50px);
+  mix-blend-mode: hard-light;
+}
+
+.gradient-blur-4 {
+  background: radial-gradient(ellipse at center, rgba(100, 200, 255, 0.3) 0%, transparent 70%);
+  filter: blur(70px);
+}
+
+/* Section headings */
+.section-heading {
+  font-family: var(--font-noto-serif), serif;
+  font-weight: 500;
+  font-size: 80px;
+  line-height: 1;
+  color: #1c2122;
+}
+
+@media (max-width: 1024px) {
+  .section-heading {
+    font-size: 56px;
+  }
+}
+
+@media (max-width: 640px) {
+  .section-heading {
+    font-size: 40px;
+  }
+}
