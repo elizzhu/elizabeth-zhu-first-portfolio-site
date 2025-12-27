@@ -1,11 +1,9 @@
-[00:00:01.306] Server  LOG     ✓ Ready in 980ms
-[00:00:03.559] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:03.749] Browser WARN    Image with src "/images/profile.jpg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
-[00:00:03.749] Browser WARN    Image with src "/images/company-logos/meta.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:00:03.749] Browser WARN    Image with src "/images/company-logos/dropbox-logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:00:03.749] Browser WARN    Image with src "/images/projects/project-bg.jpg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
-[00:00:33.263] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:33.485] Browser WARN    Image with src "/images/profile.jpg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
-[00:00:33.485] Browser WARN    Image with src "/images/company-logos/meta.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:00:33.485] Browser WARN    Image with src "/images/company-logos/dropbox-logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:00:33.485] Browser WARN    Image with src "/images/projects/project-bg.jpg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:00:00.729] Server  ERROR   (node:56886) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/elizabethzhu/Cursor/Liz's%20Website/next.config.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/elizabethzhu/Cursor/Liz's Website/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[00:00:00.810] Server  WARN    ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+[00:00:00.881] Server  LOG     ✓ Ready in 653ms
+[00:00:01.304] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:01.436] Browser WARN    Image with src "http://localhost:3001/images/company-logos/meta.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:00:01.436] Browser WARN    Image with src "http://localhost:3001/images/company-logos/dropbox-logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.

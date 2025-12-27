@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 46, "column": 0}, "map": {"version":3,"sources":["file:///Users/elizabethzhu/Cursor/Liz%27s%20Website/app/api/validate/route.ts"],"sourcesContent":["import { NextResponse } from 'next/server'\n\nconst PASSWORD = process.env.SITE_PASSWORD || 'secret123'\n\nexport async function POST(request: Request) {\n  const { password } = await request.json()\n  if (password === PASSWORD) {\n    const response = NextResponse.json({ success: true })\n    const date = new Date()\n    date.setDate(date.getDate() + 1)\n    response.cookies.set('site-unlocked', '1', {\n      httpOnly: true,\n      path: '/',\n      sameSite: 'strict',\n      expires: date,\n    })\n    return response\n  }\n  return NextResponse.json({ message: 'Invalid password' }, { status: 401 })\n}\n"],"names":[],"mappings":";;;;AAAA;;AAEA,MAAM,WAAW,QAAQ,GAAG,CAAC,aAAa,IAAI;AAEvC,eAAe,KAAK,OAAgB;IACzC,MAAM,EAAE,QAAQ,EAAE,GAAG,MAAM,QAAQ,IAAI;IACvC,IAAI,aAAa,UAAU;QACzB,MAAM,WAAW,gJAAY,CAAC,IAAI,CAAC;YAAE,SAAS;QAAK;QACnD,MAAM,OAAO,IAAI;QACjB,KAAK,OAAO,CAAC,KAAK,OAAO,KAAK;QAC9B,SAAS,OAAO,CAAC,GAAG,CAAC,iBAAiB,KAAK;YACzC,UAAU;YACV,MAAM;YACN,UAAU;YACV,SAAS;QACX;QACA,OAAO;IACT;IACA,OAAO,gJAAY,CAAC,IAAI,CAAC;QAAE,SAAS;IAAmB,GAAG;QAAE,QAAQ;IAAI;AAC1E"}}]
+}

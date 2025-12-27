@@ -154,7 +154,6 @@ __turbopack_context__.s([
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/framer-motion/dist/es/render/components/motion/proxy.mjs [app-ssr] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$scroll$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/framer-motion/dist/es/value/use-scroll.mjs [app-ssr] (ecmascript)");
 'use client';
 ;
 ;
@@ -162,59 +161,66 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$mo
 const sections = [
     {
         id: 'hero',
-        name: 'Intro',
-        threshold: 0
+        name: 'Intro'
     },
     {
-        id: 'experience',
-        name: 'Resume',
-        threshold: 0.22
+        id: 'resume',
+        name: 'Resume'
     },
     {
         id: 'work',
-        name: 'Work',
-        threshold: 0.35
-    },
-    {
-        id: 'art',
-        name: 'Play',
-        threshold: 0.84
+        name: 'Work'
     },
     {
         id: 'contact',
-        name: 'Contact',
-        threshold: 0.93
+        name: 'Contact'
     }
 ];
 function ProgressBar() {
-    const { scrollYProgress } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$scroll$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useScroll"])();
     const [activeSection, setActiveSection] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
-    const [isVisible, setIsVisible] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [isVisible, setIsVisible] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(true);
     const [isLightMode, setIsLightMode] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        const unsubscribe = scrollYProgress.on('change', (latest)=>{
-            // Show progress bar after a small scroll
-            setIsVisible(latest > 0.01);
-            // Switch to light mode after hero section (around 20% scroll)
-            setIsLightMode(latest > 0.18);
+        const handleScroll = ()=>{
+            const scrollY = window.scrollY;
+            const windowHeight = window.innerHeight;
+            // Always visible
+            setIsVisible(true);
+            // Hero section is 300vh
+            const heroSection = document.querySelector('section');
+            const heroHeight = heroSection?.offsetHeight || windowHeight * 3;
+            const resumeEl = document.querySelector('section:nth-of-type(2)');
+            const workEl = document.querySelector('section:nth-of-type(3)');
+            const contactEl = document.querySelector('section:nth-of-type(4)');
+            const resumeTop = resumeEl?.getBoundingClientRect().top ?? Infinity;
+            const workTop = workEl?.getBoundingClientRect().top ?? Infinity;
+            const contactTop = contactEl?.getBoundingClientRect().top ?? Infinity;
+            // Light mode when entering Resume section
+            setIsLightMode(resumeTop < windowHeight * 0.8);
             // Determine active section
-            for(let i = sections.length - 1; i >= 0; i--){
-                if (latest >= sections[i].threshold) {
-                    setActiveSection(i);
-                    break;
-                }
+            if (contactTop < windowHeight * 0.5) {
+                setActiveSection(3);
+            } else if (workTop < windowHeight * 0.5) {
+                setActiveSection(2);
+            } else if (resumeTop < windowHeight * 0.5) {
+                setActiveSection(1);
+            } else {
+                setActiveSection(0);
             }
+        };
+        window.addEventListener('scroll', handleScroll, {
+            passive: true
         });
-        return ()=>unsubscribe();
-    }, [
-        scrollYProgress
-    ]);
-    const scrollToSection = (threshold)=>{
-        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-        window.scrollTo({
-            top: threshold * scrollHeight,
-            behavior: 'smooth'
-        });
+        handleScroll(); // Initial check
+        return ()=>window.removeEventListener('scroll', handleScroll);
+    }, []);
+    const scrollToSection = (index)=>{
+        const sections = document.querySelectorAll('section');
+        if (sections[index]) {
+            sections[index].scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].div, {
         className: "hidden lg:block fixed top-8 left-[100px] z-[100]",
@@ -247,7 +253,7 @@ function ProgressBar() {
                     className: "flex items-center",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                            onClick: ()=>scrollToSection(section.threshold),
+                            onClick: ()=>scrollToSection(index),
                             className: "flex items-center gap-2 px-3 py-1.5 rounded-full transition-all duration-300 group",
                             style: {
                                 background: isActive ? isLightMode ? 'linear-gradient(135deg, rgba(180,130,60,0.2) 0%, rgba(140,90,40,0.15) 100%)' : 'linear-gradient(135deg, rgba(20,184,166,0.3) 0%, rgba(16,185,129,0.2) 100%)' : 'transparent'
@@ -257,7 +263,7 @@ function ProgressBar() {
                                     className: `w-2 h-2 rounded-full transition-all duration-300 ${isActive ? isLightMode ? 'bg-amber-600 shadow-[0_0_8px_rgba(180,130,60,0.6)]' : 'bg-teal-400 shadow-[0_0_8px_rgba(20,184,166,0.6)]' : isPast ? isLightMode ? 'bg-amber-600/60' : 'bg-teal-400/60' : isLightMode ? 'bg-black/20 group-hover:bg-black/40' : 'bg-white/30 group-hover:bg-white/50'}`
                                 }, void 0, false, {
                                     fileName: "[project]/components/ProgressBar.tsx",
-                                    lineNumber: 96,
+                                    lineNumber: 114,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -265,37 +271,37 @@ function ProgressBar() {
                                     children: section.name
                                 }, void 0, false, {
                                     fileName: "[project]/components/ProgressBar.tsx",
-                                    lineNumber: 113,
+                                    lineNumber: 131,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/ProgressBar.tsx",
-                            lineNumber: 84,
+                            lineNumber: 102,
                             columnNumber: 15
                         }, this),
                         index < sections.length - 1 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: `w-4 h-[1px] transition-all duration-300 ${isPast ? isLightMode ? 'bg-amber-600/60' : 'bg-teal-400/60' : isLightMode ? 'bg-black/15' : 'bg-white/20'}`
                         }, void 0, false, {
                             fileName: "[project]/components/ProgressBar.tsx",
-                            lineNumber: 134,
+                            lineNumber: 152,
                             columnNumber: 17
                         }, this)
                     ]
                 }, section.id, true, {
                     fileName: "[project]/components/ProgressBar.tsx",
-                    lineNumber: 82,
+                    lineNumber: 100,
                     columnNumber: 13
                 }, this);
             })
         }, void 0, false, {
             fileName: "[project]/components/ProgressBar.tsx",
-            lineNumber: 59,
+            lineNumber: 77,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/components/ProgressBar.tsx",
-        lineNumber: 49,
+        lineNumber: 67,
         columnNumber: 5
     }, this);
 }
